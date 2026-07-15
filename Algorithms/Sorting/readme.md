@@ -183,3 +183,47 @@ function MergeSort(arr) {
 | Best    | O(n\*log n) | O(n)  |
 | Average | O(n\*log n) | O(n)  |
 | Worst   | O(n\*log n) | O(n)  |
+
+## Quick Sort
+
+### Description
+
+Quick sort is a divide-and-conquer sorting algorithm. It picks a pivot element, partitions the array around that pivot, and then recursively sorts the two partitions.
+
+It is usually very fast in practice and performs well on large arrays, though its worst-case time complexity can degrade when the pivot choices are poor.
+
+### Implementation
+
+```javascript
+function QuickSort(arr, low, high) {
+  const partition = (arr, low, high) => {
+    const pivot = arr[high];
+    let i = low - 1;
+
+    for (let j = low; j < high; j++) {
+      if (arr[j] < pivot) {
+        i++;
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+
+    return i + 1;
+  };
+
+  if (low < high) {
+    const pivotIndex = partition(arr, low, high);
+    QuickSort(arr, low, pivotIndex - 1);
+    QuickSort(arr, pivotIndex + 1, high);
+  }
+}
+```
+
+### Complexity
+
+| Case    | Time        | Space    |
+| ------- | ----------- | -------- |
+| Best    | O(n\*log n) | O(log n) |
+| Average | O(n\*log n) | O(log n) |
+| Worst   | O(n^2)      | O(n)     |
