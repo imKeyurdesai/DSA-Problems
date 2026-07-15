@@ -74,5 +74,28 @@ function MergeSort(arr) {
     return merge(left, right)
 }
 
-let arr = [5, 4, 3, 2, 1]
-console.log(MergeSort(arr))
+function QuickSort(arr, low, high) {
+    const partition = (arr, low, high) => {
+        const pivot = arr[high]
+        let i = low - 1
+        for (let j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++
+                [arr[i], arr[j]] = [arr[j], arr[i]]
+            }
+        }
+        [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]]
+
+        return i + 1
+    }
+
+    if (low < high) {
+        const pivotIndex = partition(arr, low, high)
+        QuickSort(arr, low, pivotIndex - 1)
+        QuickSort(arr, pivotIndex + 1, high)
+    }
+}
+
+let arr = [8, 3, 1, 7, 0, 10, 2]
+QuickSort(arr, 0, arr.length - 1)
+console.log(arr)
