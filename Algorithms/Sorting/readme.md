@@ -128,3 +128,58 @@ function InsertionSort(arr) {
 | Best    | O(n)   | O(1)  |
 | Average | O(n^2) | O(1)  |
 | Worst   | O(n^2) | O(1)  |
+
+## Merge Sort
+
+### Description
+
+Merge sort is a popular sorting algorithm known for its efficiency and stability. It follows the Divide and Conquer approach. It works by recursively dividing the input array into two halves, recursively sorting the two halves and finally merging them back together to obtain the sorted array.
+
+### Implementation
+
+```javascript
+function MergeSort(arr) {
+  const merge = (left, right) => {
+    let res = [];
+    let i = 0;
+    let j = 0;
+    while (i < left.length && j < right.length) {
+      if (left[i] <= right[j]) {
+        res.push(left[i]);
+        i++;
+      } else {
+        res.push(right[j]);
+        j++;
+      }
+    }
+    while (i < left.length) {
+      res.push(left[i]);
+      i++;
+    }
+    while (j < right.length) {
+      res.push(right[j]);
+      j++;
+    }
+
+    return res;
+  };
+
+  if (arr.length <= 1) {
+    return arr;
+  }
+
+  const mid = Math.floor(arr.length / 2);
+  const left = MergeSort(arr.slice(0, mid));
+  const right = MergeSort(arr.slice(mid));
+
+  return merge(left, right);
+}
+```
+
+### Complexity
+
+| Case    | Time        | Space |
+| ------- | ----------- | ----- |
+| Best    | O(n\*log n) | O(n)  |
+| Average | O(n\*log n) | O(n)  |
+| Worst   | O(n\*log n) | O(n)  |
