@@ -1,0 +1,21 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var maxDepth = function (s) {
+    let depth = 0;
+    let r = 0;
+    for (const c of s) {
+        if (c === ')') {
+            depth--;
+            continue;
+        }
+        if (c !== '(') continue;
+        depth++;
+        if (depth > r) r = depth;
+    }
+    return r;
+};
+
+const s = "(1+(2*3)+((8)/4))+1"
+console.log(maxDepth(s))
